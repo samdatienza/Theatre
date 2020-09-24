@@ -7,11 +7,14 @@ import java.util.Scanner;
 public class Theatre {
 	public static void main(String[] args) throws IOException {
 	
+	//Create linked list
+		//LinkedList list = new LinkedList();
+		
 	//Create scanner
 	Scanner scanner = new Scanner(System.in);
 	
 	//Create file input/output stream
-	FileInputStream inputFile = new FileInputStream("Movies");
+	FileInputStream inputFile = new FileInputStream("Movies.txt");
 	
 	//Create text based menu
 	System.out.println("Please choose an option: ");
