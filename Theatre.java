@@ -9,9 +9,8 @@ public class Theatre {
 	public static void main(String[] args) throws IOException {
 	
 	//Create linked list
-	Deque<Movies> list = new LinkedList<Movies>();
-	// Create iterator
-	Iterator<Movies> it = list.iterator();
+	Deque<Movies> moviesReleased = new LinkedList<Movies>();
+	Deque<Movies> moviesReceived = new LinkedList<Movies>();
 		
 	//Create scanner
 	Scanner scanner = new Scanner(System.in);
