@@ -25,8 +25,9 @@ public class Theatre {
 	System.out.println("Press 'C' to count movies.");
 	System.out.println("Press 'X' to terminate program.");
 	
-	String option = scanner.next();
+	
 	While true {
+		String option = scanner.next();
 		if (option.equals("D")) {
 			System.out.println("You have selected to display movies.");
 			//Code to display movies
