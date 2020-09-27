@@ -43,7 +43,8 @@ public class Theatre {
 		String option = scanner.next();
 		if (option.toUpperCase().equals("D")) {
 			System.out.println("You have selected to display movies.");
-			Display.DisplayMovies(list, it);
+			Display.DisplayMovies(moviesReleased);
+			Display.DisplayMovies(moviesReceived);
 		} else if (option.toUpperCase().equals("A")) {
 			System.out.println("You have selected to add a movie.");
 			//Code to add movie
