@@ -22,7 +22,6 @@ public class Theatre {
 	String releaseDate = "";
 	String description = "";
 	String receiveDate = "";
-	String status = "";
 	
 	//Create file input/output stream
 	FileInputStream inputFile = new FileInputStream("Movies.txt");
@@ -45,7 +44,17 @@ public class Theatre {
 			//Code to display movies
 		} else if (option.equals("A")) {
 			System.out.println("You have selected to add a movie.");
-			//Code to add movie 
+			//Code to add movie
+			System.out.println("Please enter the Movie's name.");
+			name = scanner.next();
+			System.out.println("Please enter the Movie's release date.");
+			releaseDate = scanner.next();
+			System.out.println("Please enter the Movie's description.");
+			description = scanner.next();
+			System.out.println("Please enter the Movie's recieve date.");
+			receiveDate = scanner.next();
+			
+
 		} else if (option.equals("S")) {
 			System.out.println("You have selected to show movies with a given release date.");
 			//Code to show movies with given release date
