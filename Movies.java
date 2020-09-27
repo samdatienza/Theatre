@@ -9,9 +9,6 @@ public class Movies {
 	private String name;
 	private String desc;
 	private Date receivedDate;
-	private enum Status {
-		RECEIVED, RELEASED;
-	}
 	private Status status;
 	
 	// Constructors
@@ -44,5 +41,9 @@ public class Movies {
 	@Override
 	public String toString() {
 		return name + ", " + releaseDate + ", " + desc + ", " + receivedDate + ", " + status;
+	}
+	
+	enum Status {
+		RECEIVED, RELEASED;
 	}
 }
