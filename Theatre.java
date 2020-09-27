@@ -15,6 +15,7 @@ public class Theatre {
 	
 	//Create file input/output stream
 	FileInputStream inputFile = new FileInputStream("Movies.txt");
+	Scanner reader = new Scanner(inputFile);
 	
 	//Create text based menu
 	System.out.println("Please choose an option: ");
