@@ -9,7 +9,9 @@ public class Theatre {
 	public static void main(String[] args) throws IOException {
 	
 	//Create linked list
-		//LinkedList list = new LinkedList();
+	Deque<Movies> list = new LinkedList<Movies>();
+	// Create iterator
+	Iterator<Movies> it = list.iterator();
 		
 	//Create scanner
 	Scanner scanner = new Scanner(System.in);
@@ -41,7 +43,7 @@ public class Theatre {
 		String option = scanner.next();
 		if (option.equals("D")) {
 			System.out.println("You have selected to display movies.");
-			//Code to display movies
+			Display.DisplayMovies(list, it);
 		} else if (option.equals("A")) {
 			System.out.println("You have selected to add a movie.");
 			//Code to add movie
