@@ -1,5 +1,7 @@
 package project_1;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 public class Movies {
@@ -40,7 +42,9 @@ public class Movies {
 	
 	@Override
 	public String toString() {
-		return name + ", " + releaseDate + ", " + desc + ", " + receivedDate + ", " + status;
+		// Used to convert Date types to String
+		DateFormat dateFormat = new SimpleDateFormat("MM/dd/yyyy");
+		return name + ", " + dateFormat.format(releaseDate) + ", " + desc + ", " + dateFormat.format(receivedDate) + ", " + status.name();
 	}
 	
 	enum Status {
