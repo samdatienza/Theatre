@@ -11,12 +11,19 @@ public class Theatre {
 	//Create linked list
 	Deque<Movies> moviesReleased = new LinkedList<Movies>();
 	Deque<Movies> moviesReceived = new LinkedList<Movies>();
+	// Data fields of {Movies}
+	Date releaseDate;
+	String name;
+	String desc;
+	Date receivedDate;
+	Status status;
 		
 	//Create scanner
 	Scanner scanner = new Scanner(System.in);
 		
 	//Create Date formatting
-	SimpleDateFormat ft = new SimpleDateFormat ("mm/dd/YYYY");
+	SimpleDateFormat ft = new SimpleDateFormat ("MM/dd/YYYY");
+	ft.setLenient(false);
 		
 	//Temp Values for manipulation
 	String name = "";
@@ -27,6 +34,32 @@ public class Theatre {
 	//Create file input/output stream
 	FileInputStream inputFile = new FileInputStream("Movies.txt");
 	Scanner reader = new Scanner(inputFile);
+		
+	// Populating the lists
+	while (reader.hasNext()) {
+		// Getting the info for the movie
+		String[] movieInfo = reader.nextLine().split(", ");
+		// Storing the info
+		name = movieInfo[0];
+		// Checking if the dates are correctly formated.
+		try {
+			releaseDate = ft.parse(movieInfo[1]);
+			receivedDate = ft.parse(movieInfo[3]);
+		}
+		catch (Exception e) {
+			System.out.println("Invalid date format");
+			continue;
+		}
+		desc = movieInfo[2];
+		status = Status.valueOf(movieInfo[4].toLowerCase());
+		// Checking which list to add to
+		if (status.equals(Status.released)) {
+			moviesReleased.offerLast(new Movies(releaseDate, name, desc, receivedDate, status));
+		}
+		else if (status.equals(Status.received)) {
+			moviesReceived.offerLast(new Movies(releaseDate, name, desc, receivedDate, status));
+		}
+	}
 	
 	//Create text based menu
 	System.out.println("Please choose an option: ");
