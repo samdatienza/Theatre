@@ -48,6 +48,6 @@ public class Movies {
 	}
 	
 	enum Status {
-		RECEIVED, RELEASED;
+		released, received;
 	}
 }
