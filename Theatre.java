@@ -38,8 +38,9 @@ public class Theatre {
 	System.out.println("Press 'C' to count movies.");
 	System.out.println("Press 'X' to terminate program.");
 	
-	
-	While true {
+	// Boolean to break loop
+	Boolean run = true;
+	while (run) {
 		String option = scanner.next();
 		if (option.toUpperCase().equals("D")) {
 			System.out.println("You have selected to display movies.");
@@ -68,11 +69,19 @@ public class Theatre {
 			//Code to count movies
 		} else if (option.toUppperCase().equals("X")) {
 			System.out.println("You have selected to terminate the program.");
-			//Code to Terminate program
+			run = !run;
 			break;
 		} else {
 			System.out.println("You have selected an invalid option, please try again.");
 			continue;
+		}
+		System.out.println("Please choose an option: ");
+		System.out.println("Press 'D' to display movies.");
+		System.out.println("Press 'A' to add a movie.");
+		System.out.println("Press 'S' to show movies with a given release date.");
+		System.out.println("Press 'E' to edit movies.");
+		System.out.println("Press 'C' to count movies.");
+		System.out.println("Press 'X' to terminate program.");
 	}
 	
 	//Close Everything
