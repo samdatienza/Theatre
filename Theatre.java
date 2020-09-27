@@ -99,7 +99,17 @@ public class Theatre {
 			//Code to edit movies
 		} else if (option.toUpperCase().equals("C")) {
 			System.out.println("You have selected to count movies.");
-			//Code to count movies
+			System.out.print("Enter given date -> ");
+			Date given;
+			// Checking format of {given}
+			try {
+				given = ft.parse(scanner.next());
+			}
+			catch (Exception e) {
+				System.out.println("Invalid date format\n");
+				continue;
+			}
+			Count.CountMovies(moviesReleased, moviesReceived, given, ft);
 		} else if (option.toUppperCase().equals("X")) {
 			System.out.println("You have selected to terminate the program.");
 			run = !run;
