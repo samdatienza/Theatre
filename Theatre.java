@@ -26,37 +26,30 @@ public class Theatre {
 	System.out.println("Press 'X' to terminate program.");
 	
 	String option = scanner.next();
-	
-	if (option.equals("D")) {
-		System.out.println("You have selected to display movies.");
-		//Code to display movies
+	While true {
+		if (option.equals("D")) {
+			System.out.println("You have selected to display movies.");
+			//Code to display movies
+		} else if (option.equals("A")) {
+			System.out.println("You have selected to add a movie.");
+			//Code to add movie 
+		} else if (option.equals("S")) {
+			System.out.println("You have selected to show movies with a given release date.");
+			//Code to show movies with given release date
+		} else if (option.equals("E")) {
+			System.out.println("You have selected to edit movies.");
+			//Code to edit movies
+		} else if (option .equals("C")) {
+			System.out.println("You have selected to count movies.");
+			//Code to count movies
+		} else if (option.equals("X")) {
+			System.out.println("You have selected to terminate the program.");
+			//Code to Terminate program
+			break;
+		} else {
+			System.out.println("You have selected an invalid option, please try again.");
+			continue;
 	}
-	
-	if (option.equals("A")) {
-		System.out.println("You have selected to add a movie.");
-		//Code to add movie
-	}
-	
-	if (option.equals("S")) {
-		System.out.println("You have selected to show movies with a given release date.");
-		//Code to show movies with given release date
-	}
-	
-	if (option.equals("E")) {
-		System.out.println("You have selected to edit movies.");
-		//Code to edit movies
-	}
-	
-	if (option .equals("C")) {
-		System.out.println("You have selected to count movies.");
-		//Code to count movies
-	}
-	
-	if (option.equals("X")) {
-		System.out.println("You have selected to terminate the program.");
-		//Code to Terminate program
-	}
-	
 	
 	//Close Everything
 	scanner.close();
