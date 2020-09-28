@@ -24,7 +24,9 @@ Start showing movies in the theater with a given release date. You first need to
   However, do not show the movie in these cases.
   
    • The movie does not exist in the coming list.
+   
    • The movie already exists in the showing list.
+   
    • The given release date is invalid.
    
 Edit a movie in the coming list (e.g. edit the release date or the description). You first need to find the movie with the given movie name. 
