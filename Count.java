@@ -9,10 +9,19 @@ public class Count {
 	 * @param releasedMovies: list of movies that have been released
 	 * @param receivedMovies: list of movies that have been received
 	 * @param given: the given date 
-	 * @return: number of movies with a release date earlier than a given.
+	 * @return: number of movies with a release date earlier than given.
 	 * @author Seth Wolf
 	 */
-	public static void CountMovies(Deque<Movies> releasedMovies, Deque<Movies> receivedMovies, Date given, SimpleDateFormat ft) {
+	public static void CountMovies(Deque<Movies> releasedMovies, Deque<Movies> receivedMovies, String date, SimpleDateFormat ft) {
+		// Checking format of {given}
+		Date given;
+		try {
+			given = ft.parse(date);
+		}
+		catch (Exception e) {
+			System.out.println("Invalid date format\n");
+			return;
+		}
 		// Iterator for {releasedMovies}
 		Iterator<Movies> it1 = releasedMovies.iterator();
 		// Iterator for {receivedMovies}
