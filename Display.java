@@ -6,6 +6,7 @@ public class Display {
 	/**
 	 * Displays the movies in the linked list
 	 * @param list: list of movies
+	 * @author Seth Wolf
 	 */
 	public static void DisplayMovies(Deque<Movies> list) {
 		// Using {it} to move through the list
