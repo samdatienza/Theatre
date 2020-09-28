@@ -86,7 +86,7 @@ public class Theatre {
 			String given;
 			Count.CountMovies(moviesReleased, moviesReceived, given, ft);
 			
-		} else if (option.toUppperCase().equals("X")) {
+		} else if (option.toUpperCase().equals("X")) {
 			System.out.println("You have selected to terminate the program.");
 			run = !run;
 			break;
