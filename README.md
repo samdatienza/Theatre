@@ -22,6 +22,7 @@ Add a new movie (to the coming list).
 Start showing movies in the theater with a given release date. You first need to find all the movies with the given release date. Then, remove it from the coming list to the showing list.
 
   However, do not show the movie in these cases.
+  
    • The movie does not exist in the coming list.
    • The movie already exists in the showing list.
    • The given release date is invalid.
