@@ -1,6 +1,9 @@
 package project_1;
 
+import java.text.SimpleDateFormat;
 import java.util.*;
+
+import project_1.Movies.Status;
 
 public class Display {
 	/**
@@ -11,10 +14,11 @@ public class Display {
 	public static void DisplayMovies(Deque<Movies> list) {
 		// Using {it} to move through the list
 		Iterator<Movies> it = list.iterator();
-		// Printing out any movies in {list}
+		// Checking if there has an movies left
 		while (it.hasNext()) {
 			System.out.println(it.next());
 		}
+		System.out.println();
 	}
 	
 	/**
@@ -26,7 +30,6 @@ public class Display {
 	 * @param received: list of received movies
 	 * @param given: release date
 	 * @param sdfmt: format for date
-	 * @author Seth Wolf
 	 */
 	public static void ReleaseMovies(Deque<Movies> release, Deque<Movies> received, String given, SimpleDateFormat sdfmt) {
 		// Checking if {received} is empty or not.
