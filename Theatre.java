@@ -33,23 +33,29 @@ public class Theatre {
 	Add.addFile(moviesReleased, moviesReceived, reader, ft);
 	
 	
-	//Create text based menu
-	System.out.println("Please choose an option: ");
-	System.out.println("Press 'D' to display movies.");
-	System.out.println("Press 'A' to add a movie.");
-	System.out.println("Press 'S' to show movies with a given release date.");
-	System.out.println("Press 'E' to edit movies.");
-	System.out.println("Press 'C' to count movies.");
-	System.out.println("Press 'X' to terminate program.");
+
 	
 	// Boolean to break loop
 	Boolean run = true;
 	while (run) {
+		//Create text based menu
+		System.out.println("Please choose an option: ");
+		System.out.println("Press 'D' to display movies.");
+		System.out.println("Press 'A' to add a movie.");
+		System.out.println("Press 'S' to show movies with a given release date.");
+		System.out.println("Press 'E' to edit movies.");
+		System.out.println("Press 'C' to count movies.");
+		System.out.println("Press 'X' to terminate program.");
 		String option = scanner.next();
+		
 		if (option.toUpperCase().equals("D")) {
+			
 			System.out.println("You have selected to display movies.");
+			System.out.println("Movies released:");
 			Display.DisplayMovies(moviesReleased);
+			System.out.println("Movies received:");
 			Display.DisplayMovies(moviesReceived);
+			
 		} else if (option.toUpperCase().equals("A")) {
 			System.out.println("You have selected to add a movie.");
 			//Code to add movie
@@ -64,26 +70,22 @@ public class Theatre {
 			
 
 		} else if (option.toUpperCase().equals("S")) {
+			
 			System.out.println("You have selected to show movies with a given release date.");
 			System.out.print("Please enter release date -> ");
 			String relDate = scanner.next();
 			Display.ReleaseMovies(moviesReleased, moviesReceived, relDate, ft);
+			
 		} else if (option.toUpperCase().equals("E")) {
 			System.out.println("You have selected to edit movies.");
 			//Code to edit movies
 		} else if (option.toUpperCase().equals("C")) {
+			
 			System.out.println("You have selected to count movies.");
 			System.out.print("Enter given date -> ");
-			Date given;
-			// Checking format of {given}
-			try {
-				given = ft.parse(scanner.next());
-			}
-			catch (Exception e) {
-				System.out.println("Invalid date format\n");
-				continue;
-			}
+			String given;
 			Count.CountMovies(moviesReleased, moviesReceived, given, ft);
+			
 		} else if (option.toUppperCase().equals("X")) {
 			System.out.println("You have selected to terminate the program.");
 			run = !run;
