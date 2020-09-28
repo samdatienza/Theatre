@@ -67,8 +67,8 @@ public class Theatre {
 			Display.DisplayMovies(moviesReceived);
 			
 		} else if (option.toUpperCase().equals("A")) {
-			
 			System.out.println("You have selected to add a movie.");
+		 	//Code to add movie
 			System.out.println("Please enter the Movie's name.");
 			name = scanner.next();
 			System.out.println("Please enter the Movie's release date.");
@@ -77,7 +77,22 @@ public class Theatre {
 			description = scanner.next();
 			System.out.println("Please enter the Movie's recieve date.");
 			receiveDate = scanner.next();
-			
+			releaseDate = ft.parse(releaseDate);
+			recieveDate = ft.parse(recieveDate);
+			boolean matchFound = false;
+			Iterator i = moviesReceived.iterator();
+			while (!matchFound || i.hasNext()) {
+				Movies movie = i.next();
+				if (movie.getName().equals(name)) {
+					matchFound = true;
+				} 
+			}
+			if (releaseDate.after(Date recieveDate) || !matchFound ) {
+				moviesReceived.add(Movies(releaseDate, name, description, recieveDate, "received"));
+			} else {
+				System.out.println("The movie you tried to enter is invalid.");
+			}
+
 		} else if (option.toUpperCase().equals("S")) {
 			
 			System.out.println("You have selected to show movies with a given release date.");
