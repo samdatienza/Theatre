@@ -10,6 +10,7 @@ public class Count {
 	 * @param receivedMovies: list of movies that have been received
 	 * @param given: the given date 
 	 * @return: number of movies with a release date earlier than a given.
+	 * @author Seth Wolf
 	 */
 	public static void CountMovies(Deque<Movies> releasedMovies, Deque<Movies> receivedMovies, Date given, SimpleDateFormat ft) {
 		// Iterator for {releasedMovies}
