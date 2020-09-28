@@ -38,6 +38,7 @@ On demand, count the number of coming movies with release date earlier than a gi
   However, do not count in this case.
   
    • The given date is invalid.
+   
 Your program should be menu-based. Therefore, the user can choose which command to run (display movies, add movies, edit release dates, edit movie description, start showing movies in the theater, number of movies before a date, save, exist). Just show a simple text menu in the console, no GUI needed.
 Initially, your program should read movies from a file, and populate your movie lists. There is no input file provided; you need to create your own input files.
 Write a function that overwrites the file of movies to reflect the changes (e.g. newly added movies, edited movies and movies started to show in the theater). The function can be called on demand.
