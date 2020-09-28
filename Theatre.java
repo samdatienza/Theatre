@@ -6,7 +6,7 @@ import java.util.Scanner;
 import java.util.Date;
 
 public class Theatre {
-	public static void main(String[] args) throws IOException {
+	public static void main(String[] args) throws IOException, ParseException {
 	
 	//Create linked list
 	Deque<Movies> moviesReleased = new LinkedList<Movies>();
