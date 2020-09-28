@@ -28,6 +28,15 @@ public class Theatre {
 	// Populating the lists, in ascending {releaseDate}
 	Add.addFile(moviesReleased, moviesReceived, reader, ft);
 	
+	// Closing {inputFile} and {reader}
+	reader.close()
+	inputFile.close()
+	
+	// Creating an OutputFileStream and PrintWriter
+	FileOutputStream outputFile = new FileOutputStream("Movies.txt");
+	PrintWriter writer = new PrintWriter(outputFile);
+	
+	
 	//Temp Values for manipulation
 	String name = "";
 	String releaseDate = "";
@@ -45,6 +54,7 @@ public class Theatre {
 		System.out.println("Press 'S' to show movies with a given release date.");
 		System.out.println("Press 'E' to edit movies.");
 		System.out.println("Press 'C' to count movies.");
+		System.out.println("Press 'V' to save movies.");
 		System.out.println("Press 'X' to terminate program.");
 		String option = scanner.next();
 		
@@ -87,13 +97,19 @@ public class Theatre {
 			String given = scanner.next();
 			Count.CountMovies(moviesReleased, moviesReceived, given, ft);
 			
+		} else if(option.toUpperCase().equals("V")) {
+			
+			System.out.println("You have selected to save movies.");
+			Save.save(moviesReleased, writer);
+			Save.save(moviesReceived, writer);
+			
 		} else if (option.toUpperCase().equals("X")) {
 			
 			System.out.println("You have selected to terminate the program.");
 			run = !run;
 			break;
 			
-		} else {
+		}  else {
 			
 			System.out.println("You have selected an invalid option, please try again.");
 			continue;
@@ -102,10 +118,10 @@ public class Theatre {
 		System.out.println();
 	}
 	
-	//Close Everything
-	reader.close();
+	//Close Everything else
+	writer.close();
 	scanner.close();
-	inputFile.close();
+	outputFile.close();
 	
 	}
 }
