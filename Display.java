@@ -54,7 +54,6 @@ public class Display {
 			Iterator<Movies> relIt = release.iterator();
 			Movies currRel = null;
 			
-			System.out.println(sdfmt.format(releaseDate));
 			// Going to find if there are any movies with the given released date. If so, will add to {toBeReleased} to add to {release} later, while making a copy of {received} into {copyRec}
 			while (!received.isEmpty()) {
 				if (received.peekFirst().getReleaseDate().equals(releaseDate)) {
