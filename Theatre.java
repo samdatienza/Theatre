@@ -11,12 +11,6 @@ public class Theatre {
 	//Create linked list
 	Deque<Movies> moviesReleased = new LinkedList<Movies>();
 	Deque<Movies> moviesReceived = new LinkedList<Movies>();
-	// Data fields of {Movies}
-	Date releaseDate;
-	String name;
-	String desc;
-	Date receivedDate;
-	Status status;
 		
 	//Create scanner
 	Scanner scanner = new Scanner(System.in);
@@ -35,31 +29,9 @@ public class Theatre {
 	FileInputStream inputFile = new FileInputStream("Movies.txt");
 	Scanner reader = new Scanner(inputFile);
 		
-	// Populating the lists
-	while (reader.hasNext()) {
-		// Getting the info for the movie
-		String[] movieInfo = reader.nextLine().split(", ");
-		// Storing the info
-		name = movieInfo[0];
-		// Checking if the dates are correctly formated.
-		try {
-			releaseDate = ft.parse(movieInfo[1]);
-			receivedDate = ft.parse(movieInfo[3]);
-		}
-		catch (Exception e) {
-			System.out.println("Invalid date format");
-			continue;
-		}
-		desc = movieInfo[2];
-		status = Status.valueOf(movieInfo[4].toLowerCase());
-		// Checking which list to add to
-		if (status.equals(Status.released)) {
-			moviesReleased.offerLast(new Movies(releaseDate, name, desc, receivedDate, status));
-		}
-		else if (status.equals(Status.received)) {
-			moviesReceived.offerLast(new Movies(releaseDate, name, desc, receivedDate, status));
-		}
-	}
+	// Populating the lists, is ascending {releaseDate}
+	Add.addFile(moviesReleased, moviesReceived, reader, ft);
+	
 	
 	//Create text based menu
 	System.out.println("Please choose an option: ");
@@ -93,7 +65,9 @@ public class Theatre {
 
 		} else if (option.toUpperCase().equals("S")) {
 			System.out.println("You have selected to show movies with a given release date.");
-			//Code to show movies with given release date
+			System.out.print("Please enter release date -> ");
+			String relDate = scanner.next();
+			Display.ReleaseMovies(moviesReleased, moviesReceived, relDate, ft);
 		} else if (option.toUpperCase().equals("E")) {
 			System.out.println("You have selected to edit movies.");
 			//Code to edit movies
