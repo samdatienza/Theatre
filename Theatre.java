@@ -67,6 +67,7 @@ public class Theatre {
 			Display.DisplayMovies(moviesReceived);
 			
 		} else if (option.toUpperCase().equals("A")) {
+			
 			System.out.println("You have selected to add a movie.");
 		 	//Code to add movie
 			System.out.println("Please enter the Movie's name.");
@@ -77,18 +78,21 @@ public class Theatre {
 			description = scanner.next();
 			System.out.println("Please enter the Movie's recieve date.");
 			receiveDate = scanner.next();
-			releaseDate = ft.parse(releaseDate);
-			recieveDate = ft.parse(recieveDate);
 			boolean matchFound = false;
-			Iterator i = moviesReceived.iterator();
-			while (!matchFound || i.hasNext()) {
-				Movies movie = i.next();
-				if (movie.getName().equals(name)) {
+			Iterator<Movies> i = moviesReceived.iterator();
+			while (i.hasNext()) {
+				if (i.next().getName().equals(name)) {
 					matchFound = true;
+					break;
 				} 
 			}
-			if (releaseDate.after(Date recieveDate) || !matchFound ) {
-				moviesReceived.add(Movies(releaseDate, name, description, recieveDate, "received"));
+			if (!matchFound && ft.parse(releaseDate).after(ft.parse(receiveDate))) {
+				try {
+				moviesReceived.add(new Movies(ft.parse(releaseDate), name, description, ft.parse(receiveDate), Status.received));
+				}
+				catch (Exception e) {
+					System.out.println("The movie you tried to enter is invalid.");
+				}
 			} else {
 				System.out.println("The movie you tried to enter is invalid.");
 			}
@@ -122,6 +126,8 @@ public class Theatre {
 			
 			System.out.println("You have selected to terminate the program.");
 			run = !run;
+			Save.save(moviesReleased, writer);
+			Save.save(moviesReceived, writer);
 			break;
 			
 		}  else {
