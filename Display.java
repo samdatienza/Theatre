@@ -11,7 +11,7 @@ public class Display {
 	 * @param list: list of movies
 	 * @author Seth Wolf
 	 */
-	public static void DisplayMovies(Deque<Movies> list) {
+	public static void DisplayMovies(LinkedList<Movies> list) {
 		// Using {it} to move through the list
 		Iterator<Movies> it = list.iterator();
 		// Checking if there has an movies left
@@ -31,7 +31,7 @@ public class Display {
 	 * @param given: release date
 	 * @param sdfmt: format for date
 	 */
-	public static void ReleaseMovies(Deque<Movies> release, Deque<Movies> received, String given, SimpleDateFormat sdfmt) {
+	public static void ReleaseMovies(LinkedList<Movies> release, LinkedList<Movies> received, String given, SimpleDateFormat sdfmt) {
 		// Checking if {received} is empty or not.
 		if (!received.isEmpty()) { // If {received} is not empty.
 			// Checking first if {given} is in the correct format.
