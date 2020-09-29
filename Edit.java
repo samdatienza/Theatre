@@ -55,6 +55,7 @@ public class Edit {
 			//User inputed a movie not in the list
 			else {
 				System.out.println("Movie not found");
+				break;
 			}
 		}
 	}
