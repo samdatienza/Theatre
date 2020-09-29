@@ -66,7 +66,7 @@ public class Theatre {
 		} else if (option.toUpperCase().equals("A")) {
 			
 			System.out.println("You have selected to add a movie.");
-		 	//Code to add movie
+		 	//Gather needed data for movie to be added
 			System.out.println("Please enter the Movie's name.");
 			name = scanner.next();
 			System.out.println("Please enter the Movie's release date.");
@@ -75,8 +75,10 @@ public class Theatre {
 			description = scanner.next();
 			System.out.println("Please enter the Movie's recieve date.");
 			receiveDate = scanner.next();
+			
 			boolean matchFound = false;
 			Iterator<Movies> i = moviesReceived.iterator();
+			//Check to see if movie is already in list
 			while (i.hasNext()) {
 				if (i.next().getName().equals(name)) {
 					matchFound = true;
@@ -85,7 +87,9 @@ public class Theatre {
 			}
 			if (!matchFound && ft.parse(releaseDate).after(ft.parse(receiveDate))) {
 				try {
+				//takes gatherd info, creates it in a movies object, and adds to the list, then sorts the list
 				moviesReceived.add(new Movies(ft.parse(releaseDate), name, description, ft.parse(receiveDate), Status.received));
+				sort(moviesReceived);
 				}
 				catch (Exception e) {
 					System.out.println("The movie you tried to enter is invalid.");
