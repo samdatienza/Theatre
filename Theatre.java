@@ -12,8 +12,8 @@ public class Theatre {
 	public static void main(String[] args) throws IOException, ParseException {
 	
 	//Create linked list
-	Deque<Movies> moviesReleased = new LinkedList<Movies>();
-	Deque<Movies> moviesReceived = new LinkedList<Movies>();
+	LinkedList<Movies> moviesReleased = new LinkedList<Movies>();
+	LinkedList<Movies> moviesReceived = new LinkedList<Movies>();
 	// For formating dates
 	SimpleDateFormat ft = new SimpleDateFormat("MM/dd/yyyy");
 	ft.setLenient(false);
@@ -139,3 +139,4 @@ public class Theatre {
 	
 	}
 }
+
