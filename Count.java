@@ -12,7 +12,7 @@ public class Count {
 	 * @return: number of movies with a release date earlier than given.
 	 * @author Seth Wolf
 	 */
-	public static void CountMovies(Deque<Movies> releasedMovies, Deque<Movies> receivedMovies, String date, SimpleDateFormat ft) {
+	public static void CountMovies(LinkedList<Movies> releasedMovies, LinkedList<Movies> receivedMovies, String date, SimpleDateFormat ft) {
 		// Checking format of {given}
 		Date given;
 		try {
