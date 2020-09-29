@@ -1,10 +1,10 @@
 package project_1;
 
-import java.io.FileInputStream;
-import java.io.IOException;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
+import java.io.*;
+import java.text.*;
 import java.util.*;
+
+import project_1.Movies.Status;
 
 
 
@@ -21,27 +21,24 @@ public class Theatre {
 	//Create scanner
 	Scanner scanner = new Scanner(System.in);
 	
-	//Create file input/output stream
+	//Create file input stream
 	FileInputStream inputFile = new FileInputStream("Movies.txt");
 	Scanner reader = new Scanner(inputFile);
 	
 	// Populating the lists, in ascending {releaseDate}
 	Add.addFile(moviesReleased, moviesReceived, reader, ft);
 	
-	// Closing {inputFile} and {reader}
-	reader.close()
-	inputFile.close()
+	// Closing {reader} and {inputFile}
+	inputFile.close();
+	reader.close();
 	
-	// Creating an OutputFileStream and PrintWriter
-	FileOutputStream outputFile = new FileOutputStream("Movies.txt");
-	PrintWriter writer = new PrintWriter(outputFile);
-	
+
 	
 	//Temp Values for manipulation
 	String name = "";
-	String releaseDate = "";
+	String releaseDate;
+	String receiveDate;
 	String description = "";
-	String receiveDate = "";
 	
 	
 	// Boolean for while loop
@@ -96,7 +93,7 @@ public class Theatre {
 			} else {
 				System.out.println("The movie you tried to enter is invalid.");
 			}
-
+			
 		} else if (option.toUpperCase().equals("S")) {
 			
 			System.out.println("You have selected to show movies with a given release date.");
@@ -116,21 +113,19 @@ public class Theatre {
 			String given = scanner.next();
 			Count.CountMovies(moviesReleased, moviesReceived, given, ft);
 			
-		} else if(option.toUpperCase().equals("V")) {
-			
-			System.out.println("You have selected to save movies.");
-			Save.save(moviesReleased, writer);
-			Save.save(moviesReceived, writer);
-			
 		} else if (option.toUpperCase().equals("X")) {
 			
 			System.out.println("You have selected to terminate the program.");
 			run = !run;
-			Save.save(moviesReleased, writer);
-			Save.save(moviesReceived, writer);
+			Save.save(moviesReleased, moviesReceived);
 			break;
 			
-		}  else {
+		} else if(option.toUpperCase().equals("V")) {
+			
+			System.out.println("You have selected to save movies.");
+			Save.save(moviesReleased, moviesReceived);
+			
+		} else {
 			
 			System.out.println("You have selected an invalid option, please try again.");
 			continue;
@@ -140,9 +135,7 @@ public class Theatre {
 	}
 	
 	//Close Everything else
-	writer.close();
 	scanner.close();
-	outputFile.close();
 	
 	}
 }
