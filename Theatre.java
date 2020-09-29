@@ -108,7 +108,9 @@ public class Theatre {
 		} else if (option.toUpperCase().equals("E")) {
 			
 			System.out.println("You have selected to edit movies.");
-			//Code to edit movies
+			System.out.println("Enter movie to edit.");
+			String editName = scanner.next();
+			Edit.editMovie(moviesReceived, editName, ft);
 			
 		} else if (option.toUpperCase().equals("C")) {
 			
