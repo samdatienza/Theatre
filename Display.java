@@ -23,7 +23,7 @@ public class Display {
 	
 	/**
 	 * Will show movies from the received list from the given date unless
-	 * 1. The received list is empty
+	 * 1. The movie does not exist
 	 * 2. The released movie is already in the released list
 	 * 3. The given date is invalid
 	 * @param release: list of released movies
@@ -31,103 +31,86 @@ public class Display {
 	 * @param given: release date
 	 * @param sdfmt: format for date
 	 */
-	public static void ReleaseMovies(LinkedList<Movies> release, LinkedList<Movies> received, String given, SimpleDateFormat sdfmt) {
-		// Checking if {received} is empty or not.
-		if (!received.isEmpty()) { // If {received} is not empty.
-			// Checking first if {given} is in the correct format.
-			Date releaseDate;
-			try {
-				releaseDate = sdfmt.parse(given);
-			}
-			catch (Exception e) {
-				System.out.println("Invalid format");
-				return;
-			}
-			// Making lists to use to copy data from received
-			LinkedList<Movies> toBeReleased =  new LinkedList<Movies>();
-			LinkedList<Movies> copyRec = new LinkedList<Movies>();
-			LinkedList<Movies> copyRel = new LinkedList<Movies>();
-			// Will be copy of {toBereleased} that are not in {released}
-			LinkedList<Movies> copyTBR = new LinkedList<Movies>();
-			// Iterator to go through list
-			// Iterator for {released}
-			Iterator<Movies> relIt = release.iterator();
-			Movies currRel = null;
-			// Going to find if there are any movies with the given released date. If so, will add to {toBeReleased} to add to {release} later, while making a copy of {received} into {copyRec}
-			while (!received.isEmpty()) {
-				if (received.peekFirst().getReleaseDate().equals(releaseDate)) {
-					toBeReleased.offerLast(received.pollFirst());
-				}
-				else {
-					copyRec.offerLast(received.pollFirst());
-				}
-			}
-			
-			// Re-populating {received}
-			while(!copyRec.isEmpty()) { received.offerLast(copyRec.pollFirst()); }
-			
-			// Finding movies to be in {copyTBR}
-			while (!toBeReleased.isEmpty()) {
-				// Making sure starting from {head} of {release}
-				relIt = release.iterator();
-				for (int i = 0; i < release.size(); i++) {
-					// If movie is in {release} then will remove from {toBeReleased} w/o adding to {copyTBR}
-					currRel = relIt.next();
-					if (toBeReleased.peekFirst().getName().equals(currRel.getName())) {
-						toBeReleased.pollFirst();
-						break;
-					}
-				}
-				// Also, change {status} of {current} to {released}
-				Movies current = toBeReleased.pollFirst();
-				current.setStatus(Status.released);
-				copyTBR.offerLast(current);
-			}
-			
-			// Display movies to be released
-			System.out.println("Movies to be released:");
-			DisplayMovies(copyTBR);
-			
-			// Adding {copyTBR} to {released}
-			while (!copyTBR.isEmpty()) {
-				relIt = release.iterator();
-				currRel = null;
-				Movies found = null;
-				while (relIt.hasNext()) {
-					currRel = relIt.next();
-					if (currRel.equals(copyTBR.peekFirst())) {
-						found = currRel;
-					}
-				}
-				if (found != null) { // If {copyTBR}'s {head} is already in {release} will just remove
-					copyTBR.pollFirst();
-				}
-				if (release.isEmpty()) { // Add {copyTBR} {head} in front of {release} {head}
-					release.offerFirst(copyTBR.pollFirst());
-				}
-				if (copyTBR.peekFirst().getReleaseDate().before(release.peekFirst().getReleaseDate()) || copyTBR.peekFirst().getReleaseDate().equals(release.peekFirst().getReleaseDate())) { // Add to front if {copyTBR} {head}'s {releaseDate} is before {release} {head}'s {releaseDate}
-					release.offerFirst(copyTBR.pollFirst());
-				}
-				if (copyTBR.peekFirst().getReleaseDate().after(release.peekLast().getReleaseDate()) || copyTBR.peekFirst().getReleaseDate().equals(release.peekLast().getReleaseDate())) { // Add to end if {copyTBR} {head}'s {releaseDate} is after {release} {tail}'s {releaseDate}
-					release.offerLast(copyTBR.pollFirst());
-				}
-				else { // If {copyTBR}'s {head} is neither the earliest or latest {releaseDate} will remove {release}'s {head} until {copyTBR}'s {head} {releaseDate} is before {release}'s head
-					while (!release.isEmpty()) { copyRel.offerLast(release.pollFirst()); } // Copy of {release}
-					while (!copyRel.isEmpty()) { 
-						if (copyTBR.peekFirst().getReleaseDate().before(copyRel.peekFirst().getReleaseDate()) || copyTBR.peekFirst().getReleaseDate().equals(copyRel.peekFirst().getReleaseDate())) {
-							release.offerLast(copyTBR.pollFirst());
-							break;
-						}
-						release.offerLast(copyRel.pollFirst());
-					}
-					if (!copyRel.isEmpty()) { release.offerLast(copyRel.pollFirst()); }
-				}
-				
+	public static void ReleaseMovies(LinkedList<Movies> release, LinkedList<Movies> receive, Date given, SimpleDateFormat sdfmt) {
+		try {
+			sdfmt.format(given);
+		}
+		catch (Exception e) {
+			System.out.println("Invalid date format");
+		}
+		LinkedList<Movies> toBeReleased = new LinkedList<Movies>();
+		Iterator<Movies> it = null;
+		Iterator<Movies> it2 = null; 
+		Movies current, relCur, remove, recCur;
+		// Will check if there is a movie in {receive} with {given}
+		it = receive.iterator();
+		while (it.hasNext()) {
+			current = it.next();
+			if (current.getReleaseDate().equals(given)) {
+				toBeReleased.offerLast(current);
 			}
 		}
-		else { // If {received} is empty.
-			System.out.println("No new movies to release.");
+
+		// Checking if a movie in {toBeReleased} is in {release}
+		it = toBeReleased.iterator();
+		while (it.hasNext()) {
+			current = it.next();
+			it2 = release.iterator();
+			while (it2.hasNext()) {
+				relCur = it2.next();
+				if (current.getName().equals(relCur.getName())) { // Will remove {remove} from {toBeReleased} 
+					remove = relCur;
+					LinkedList<Movies> copy = new LinkedList<Movies>();
+					while (!toBeReleased.isEmpty()) { copy.offerLast(toBeReleased.pollFirst()); }
+					while (!copy.isEmpty()) {
+						if (remove.getName().equals(copy.peekFirst().getName())) {
+							copy.pollFirst();
+						}
+						else {
+							toBeReleased.offerLast(copy.pollFirst());
+						}
+					}
+					it = toBeReleased.iterator();
+				}
+			}
+		}		
+		
+		if (toBeReleased.isEmpty()) {
+			System.out.println("No movie(s) to be released");
 			return;
 		}
+		
+		// Add movies while changing the {Status}
+		it = toBeReleased.iterator();
+		while (it.hasNext()) {
+			current = it.next();
+			current.setStatus(Status.released);
+			Add.addSorted(release, current);
+		}
+		
+		// Removing movie from receive
+		it = receive.iterator();
+		while (it.hasNext()) {
+			recCur = it.next();
+			it2 = toBeReleased.iterator();
+			while (it2.hasNext()) {
+				current = it2.next();
+				if (recCur.getName().equals(current.getName())) {
+					remove = current;
+					LinkedList<Movies> copy = new LinkedList<Movies>();
+					while (!receive.isEmpty()) { copy.offerLast(receive.pollFirst()); }
+					while (!copy.isEmpty()) {
+						if (remove.getName().equals(copy.peekFirst().getName())) {
+							copy.pollFirst();
+						}
+						else {
+							receive.offerLast(copy.pollFirst());
+						}
+					}
+					it = receive.iterator();
+				}
+			}
+		}
 	}
+	
 }

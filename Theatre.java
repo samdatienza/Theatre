@@ -108,7 +108,7 @@ public class Theatre {
 			
 			System.out.println("You have selected to show movies with a given release date.");
 			System.out.print("Please enter release date -> ");
-			String relDate = scanner.nextLine();
+			Date relDate = ft.parse(scanner.nextLine());
 			Display.ReleaseMovies(moviesReleased, moviesReceived, relDate, ft);
 			
 		} else if (option.toUpperCase().equals("E")) {
