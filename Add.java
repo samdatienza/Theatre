@@ -16,7 +16,7 @@ public class Add {
 	 * @throws ParseException: for SimpleDateFormat method
 	 * @author Seth Wolf
 	 */
-	public static void addFile(Deque<Movies> release, Deque<Movies> receive, Scanner reader, SimpleDateFormat sdfrmt) throws ParseException {
+	public static void addFile(LinkedList<Movies> release, LinkedList<Movies> receive, Scanner reader, SimpleDateFormat sdfrmt) throws ParseException {
 		while (reader.hasNext()) {
 			String[] movieInfo = reader.nextLine().split(", ");
 			Movies newMovie = new Movies(sdfrmt.parse(movieInfo[1]), movieInfo[0], movieInfo[2], sdfrmt.parse(movieInfo[3]), Status.valueOf(movieInfo[4]));
@@ -32,7 +32,7 @@ public class Add {
 				}
 				else { // If {newMovie}'s {releaseDate} is neither the earliest or latest {releaseDate}
 					// Make a copy of {release}
-					Deque<Movies> copyRel = new LinkedList<Movies>();
+					LinkedList<Movies> copyRel = new LinkedList<Movies>();
 					while (!release.isEmpty()) { copyRel.offerLast(release.pollFirst()); } 
 					while (!copyRel.isEmpty()) { // Check's {newMovie}'s {releaseDate} and fill {release} again
 						if (newMovie.getReleaseDate().before(copyRel.peekFirst().getReleaseDate())) {
@@ -54,7 +54,7 @@ public class Add {
 				}
 				else { // If {newMovie}'s {releaseDate} is neither the earliest or latest {releaseDate}
 					// Make a copy of {receive}
-					Deque<Movies> copyRec = new LinkedList<Movies>();
+					LinkedList<Movies> copyRec = new LinkedList<Movies>();
 					while (!release.isEmpty()) { copyRec.offerLast(release.pollFirst()); } 
 					while (!copyRec.isEmpty()) { // Check's {newMovie}'s {releaseDate} and fill {release} again
 						if (newMovie.getReleaseDate().before(copyRec.peekFirst().getReleaseDate())) {
