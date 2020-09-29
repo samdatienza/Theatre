@@ -6,12 +6,12 @@ import java.io.*;
 public class Save {
 	/**
 	 * Will save to file
-	 * @param release: deque list of released movies
-	 * @param receive: deque list of received movies
+	 * @param release: LinkedList list of released movies
+	 * @param receive: LinkedList list of received movies
 	 * @param throws: for FileOutputStream
 	 * @author Seth Wolf
 	 */
-	public static void save(Deque<Movies> release, Deque<Movies> receive) throws IOException {
+	public static void save(LinkedList<Movies> release, LinkedList<Movies> receive) throws IOException {
 		// FileOutputStream and PrintWriter
 		FileOutputStream outputFile = new FileOutputStream("Movies.txt");
 		PrintWriter wrt = new PrintWriter(outputFile);
