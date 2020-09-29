@@ -11,7 +11,7 @@ public class Save {
 	 * @param throws: for FileOutputStream
 	 * @author Seth Wolf
 	 */
-	public static void save(LinkedList<Movies> release, LinkedList<Movies> receive) throws IOException {
+	public static void save(Deque<Movies> release, Deque<Movies> receive) throws IOException {
 		// FileOutputStream and PrintWriter
 		FileOutputStream outputFile = new FileOutputStream("Movies.txt");
 		PrintWriter wrt = new PrintWriter(outputFile);

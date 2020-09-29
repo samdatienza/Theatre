@@ -44,16 +44,15 @@ public class Display {
 				return;
 			}
 			// Making lists to use to copy data from received
-			Deque<Movies> toBeReleased =  new LinkedList<Movies>();
-			Deque<Movies> copyRec = new LinkedList<Movies>();
-			Deque<Movies> copyRel = new LinkedList<Movies>();
+			LinkedList<Movies> toBeReleased =  new LinkedList<Movies>();
+			LinkedList<Movies> copyRec = new LinkedList<Movies>();
+			LinkedList<Movies> copyRel = new LinkedList<Movies>();
 			// Will be copy of {toBereleased} that are not in {released}
-			Deque<Movies> copyTBR = new LinkedList<Movies>();
+			LinkedList<Movies> copyTBR = new LinkedList<Movies>();
 			// Iterator to go through list
 			// Iterator for {released}
 			Iterator<Movies> relIt = release.iterator();
 			Movies currRel = null;
-			
 			// Going to find if there are any movies with the given released date. If so, will add to {toBeReleased} to add to {release} later, while making a copy of {received} into {copyRec}
 			while (!received.isEmpty()) {
 				if (received.peekFirst().getReleaseDate().equals(releaseDate)) {
@@ -106,20 +105,22 @@ public class Display {
 				if (release.isEmpty()) { // Add {copyTBR} {head} in front of {release} {head}
 					release.offerFirst(copyTBR.pollFirst());
 				}
-				if (copyTBR.peekFirst().getReleaseDate().before(release.peekFirst().getReleaseDate())) { // Add to front if {copyTBR} {head}'s {releaseDate} is before {release} {head}'s {releaseDate}
+				if (copyTBR.peekFirst().getReleaseDate().before(release.peekFirst().getReleaseDate()) || copyTBR.peekFirst().getReleaseDate().equals(release.peekFirst().getReleaseDate())) { // Add to front if {copyTBR} {head}'s {releaseDate} is before {release} {head}'s {releaseDate}
 					release.offerFirst(copyTBR.pollFirst());
 				}
-				if (copyTBR.peekFirst().getReleaseDate().after(release.peekLast().getReleaseDate())) { // Add to end if {copyTBR} {head}'s {releaseDate} is after {release} {tail}'s {releaseDate}
+				if (copyTBR.peekFirst().getReleaseDate().after(release.peekLast().getReleaseDate()) || copyTBR.peekFirst().getReleaseDate().equals(release.peekLast().getReleaseDate())) { // Add to end if {copyTBR} {head}'s {releaseDate} is after {release} {tail}'s {releaseDate}
 					release.offerLast(copyTBR.pollFirst());
 				}
 				else { // If {copyTBR}'s {head} is neither the earliest or latest {releaseDate} will remove {release}'s {head} until {copyTBR}'s {head} {releaseDate} is before {release}'s head
 					while (!release.isEmpty()) { copyRel.offerLast(release.pollFirst()); } // Copy of {release}
 					while (!copyRel.isEmpty()) { 
-						if (copyTBR.peekFirst().getReleaseDate().before(copyRel.peekFirst().getReleaseDate())) {
+						if (copyTBR.peekFirst().getReleaseDate().before(copyRel.peekFirst().getReleaseDate()) || copyTBR.peekFirst().getReleaseDate().equals(copyRel.peekFirst().getReleaseDate())) {
 							release.offerLast(copyTBR.pollFirst());
+							break;
 						}
 						release.offerLast(copyRel.pollFirst());
 					}
+					if (!copyRel.isEmpty()) { release.offerLast(copyRel.pollFirst()); }
 				}
 				
 			}

@@ -35,10 +35,10 @@ public class Theatre {
 
 	
 	//Temp Values for manipulation
-	String name = "";
+	String name;
 	String releaseDate;
 	String receiveDate;
-	String description = "";
+	String description;
 	
 	
 	// Boolean for while loop
@@ -53,7 +53,7 @@ public class Theatre {
 		System.out.println("Press 'C' to count movies.");
 		System.out.println("Press 'V' to save movies.");
 		System.out.println("Press 'X' to terminate program.");
-		String option = scanner.next();
+		String option = scanner.nextLine();
 		
 		if (option.toUpperCase().equals("D")) {
 			
@@ -68,13 +68,13 @@ public class Theatre {
 			System.out.println("You have selected to add a movie.");
 		 	//Gather needed data for movie to be added
 			System.out.println("Please enter the Movie's name.");
-			name = scanner.next();
+			name = scanner.nextLine();
 			System.out.println("Please enter the Movie's release date.");
-			releaseDate = scanner.next();
+			releaseDate = scanner.nextLine();
 			System.out.println("Please enter the Movie's description.");
-			description = scanner.next();
+			description = scanner.nextLine();
 			System.out.println("Please enter the Movie's recieve date.");
-			receiveDate = scanner.next();
+			receiveDate = scanner.nextLine();
 			
 			boolean matchFound = false;
 			Iterator<Movies> i = moviesReceived.iterator();
@@ -85,38 +85,44 @@ public class Theatre {
 					break;
 				} 
 			}
+			try {
+				ft.parse(releaseDate).after(ft.parse(receiveDate));
+			}
+			catch (Exception e) {
+				System.out.println("The movie you tried to enter is invalid.");
+				System.out.println();
+				continue;
+			}
 			if (!matchFound && ft.parse(releaseDate).after(ft.parse(receiveDate))) {
-				try {
-				//takes gatherd info, creates it in a movies object, and adds to the list, then sorts the list
-				moviesReceived.add(new Movies(ft.parse(releaseDate), name, description, ft.parse(receiveDate), Status.received));
-				sort(moviesReceived);
-				}
-				catch (Exception e) {
-					System.out.println("The movie you tried to enter is invalid.");
-				}
-			} else {
+				//takes gathered info, creates it in a movies object, and adds to the list, then sorts the list
+				Movies newMovie = new Movies(ft.parse(releaseDate), name, description, ft.parse(receiveDate), Status.received);
+				Add.addSorted(moviesReceived, newMovie);
+			
+			}
+			 else {
 				System.out.println("The movie you tried to enter is invalid.");
 			}
+
 			
 		} else if (option.toUpperCase().equals("S")) {
 			
 			System.out.println("You have selected to show movies with a given release date.");
 			System.out.print("Please enter release date -> ");
-			String relDate = scanner.next();
+			String relDate = scanner.nextLine();
 			Display.ReleaseMovies(moviesReleased, moviesReceived, relDate, ft);
 			
 		} else if (option.toUpperCase().equals("E")) {
 			
 			System.out.println("You have selected to edit movies.");
 			System.out.println("Enter movie to edit.");
-			String editName = scanner.next();
-			Edit.editMovie(moviesReceived, editName, ft);
+			String editName = scanner.nextLine();
+			Edit.editMovie(moviesReceived, editName, ft, scanner);
 			
 		} else if (option.toUpperCase().equals("C")) {
 			
 			System.out.println("You have selected to count movies.");
 			System.out.print("Enter given date -> ");
-			String given = scanner.next();
+			String given = scanner.nextLine();
 			Count.CountMovies(moviesReleased, moviesReceived, given, ft);
 			
 		} else if (option.toUpperCase().equals("X")) {
@@ -145,4 +151,3 @@ public class Theatre {
 	
 	}
 }
-
