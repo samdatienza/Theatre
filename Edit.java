@@ -50,13 +50,10 @@ public class Edit {
 					found.setReleaseDate(updatedRelDate);
 					
 				}
-				break;
-			}
-			//User inputed a movie not in the list
-			else {
-				System.out.println("Movie not found");
-				break;
+				return;
 			}
 		}
+		//User inputed a movie not in the list
+		System.out.println("Movie not found");
 	}
 }
